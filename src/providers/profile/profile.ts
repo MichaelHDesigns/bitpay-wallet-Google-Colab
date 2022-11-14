@@ -526,6 +526,7 @@ export class ProfileProvider {
           (chain == 'btc' ||
             (chain == 'bch' && coinCode == "145'") ||
             chain == 'ltc' ||
+            chain == 'hth' ||
             chain == 'doge'))
       ) {
         return true;
@@ -537,6 +538,7 @@ export class ProfileProvider {
           (chain == 'btc' ||
             (chain == 'bch' && coinCode == "145'") ||
             chain == 'ltc' ||
+            chain == 'hth' ||
             chain == 'doge'))
       ) {
         return true;
