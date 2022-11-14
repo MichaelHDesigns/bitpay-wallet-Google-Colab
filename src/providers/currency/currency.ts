@@ -32,6 +32,7 @@ export class CurrencyProvider {
     WBTC: 'wbtc',
     DOGE: 'doge',
     LTC: 'ltc',
+    HTH: 'hth',
     SHIB: 'shib'
   };
 
