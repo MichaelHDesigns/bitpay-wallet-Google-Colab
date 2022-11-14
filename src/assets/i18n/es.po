@@ -1550,6 +1550,9 @@ msgstr "¿Cómo recuperar sus fondos si pierde este dispositivo?"
 msgid "However, unconfirmed funds are not allowed for spending with merchants, BitPay Card loads, or BitPay in-app gift card purchases."
 msgstr "Sin embargo, no se permite utilizar fondos sin confirmar en pagos a comerciantes, en cargas de la BitPay Card o en compras de gift cards dentro de la aplicación."
 
+msgid "HTH Address"
+msgstr ""
+
 msgid "I UNDERSTAND"
 msgstr "ENTENDIDO"
 
