@@ -14,6 +14,7 @@ export class AddressProvider {
   private bitcoreCash;
   private bitcoreDoge;
   private bitcoreLtc;
+  private bitcoreHth;
   private core;
 
   constructor(private bwcProvider: BwcProvider, private logger: Logger) {
@@ -21,6 +22,7 @@ export class AddressProvider {
     this.bitcoreCash = this.bwcProvider.getBitcoreCash();
     this.bitcoreDoge = this.bwcProvider.getBitcoreDoge();
     this.bitcoreLtc = this.bwcProvider.getBitcoreLtc();
+    this.bitcoreDoge = this.bwcProvider.getBitcoreHth();
     this.core = this.bwcProvider.getCore();
   }
 
@@ -83,9 +85,14 @@ export class AddressProvider {
                 network = this.bitcoreLtc.Address(address).network.name;
                 return { coin: 'ltc', network };
               } catch (e) {
+              try {
+                network = this.bitcoreHth.Address(address).network.name;
+                return { coin: 'hth', network };
+              } catch (e) {
                 return null;
               }
             }
+           }
           }
         }
       }
@@ -103,6 +110,8 @@ export class AddressProvider {
     const URIDoge = this.bitcoreDoge.URI;
     const AddressLtc = this.bitcoreLtc.Address;
     const URILtc = this.bitcoreLtc.URI;
+    const AddressDoge = this.bitcoreHth.Address;
+    const URIDoge = this.bitcoreHth.URI;
 
     const { Validation } = this.core;
 
@@ -123,6 +132,8 @@ export class AddressProvider {
     if (AddressDoge.isValid(str, 'testnet')) return true;
     if (AddressLtc.isValid(str, 'livenet')) return true;
     if (AddressLtc.isValid(str, 'testnet')) return true;
+    if (AddressHth.isValid(str, 'livenet')) return true;
+    if (AddressHth.isValid(str, 'testnet')) return true;
     if (Validation.validateAddress('XRP', 'livenet', str)) return true;
     if (Validation.validateAddress('ETH', 'livenet', str)) return true;
 
