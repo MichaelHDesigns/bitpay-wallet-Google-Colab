@@ -1673,6 +1673,9 @@ msgid ""
 "BitPay Card loads, or BitPay in-app gift card purchases."
 msgstr ""
 
+msgid "HTH Address"
+msgstr ""
+
 msgid "I UNDERSTAND"
 msgstr ""
 
