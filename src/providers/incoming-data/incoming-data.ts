@@ -90,7 +90,7 @@ export class IncomingDataProvider {
 
   private isValidPayPro(data: string): boolean {
     data = this.sanitizeUri(data);
-    return !!/^(bitcoin|bitcoincash|bchtest|ethereum|ripple|dogecoin|litecoin)?:\?r=[\w+]/.exec(
+    return !!/^(bitcoin|bitcoincash|bchtest|ethereum|ripple|dogecoin|litecoin|hth)?:\?r=[\w+]/.exec(
       data
     );
   }
@@ -142,6 +142,11 @@ export class IncomingDataProvider {
   private isValidLitecoinUri(data: string): boolean {
     data = this.sanitizeUri(data);
     return !!this.bwcProvider.getBitcoreLtc().URI.isValid(data);
+  }
+  
+  private isValidHthUri(data: string): boolean {
+    data = this.sanitizeUri(data);
+    return !!this.bwcProvider.getBitcoreHth().URI.isValid(data);
   }
 
   private isValidWalletConnectUri(data: string): boolean {
@@ -211,6 +216,13 @@ export class IncomingDataProvider {
     return !!(
       this.bwcProvider.getBitcoreLtc().Address.isValid(data, 'livenet') ||
       this.bwcProvider.getBitcoreLtc().Address.isValid(data, 'testnet')
+    );
+  }
+  
+  private isValidHthAddress(data: string): boolean {
+    return !!(
+      this.bwcProvider.getBitcoreHth().Address.isValid(data, 'livenet') ||
+      this.bwcProvider.getBitcoreHth().Address.isValid(data, 'testnet')
     );
   }
 
@@ -524,6 +536,21 @@ export class IncomingDataProvider {
     } else this.goSend(address, amount, message, coin);
   }
 
+   private handleHthUri(data: string, redirParams?: RedirParams): void {
+    this.logger.debug('Incoming-data: HTH URI');
+    let amountFromRedirParams =
+      redirParams && redirParams.amount ? redirParams.amount : '';
+    const coin = 'hth';
+    let parsed = this.bwcProvider.getBitcoreHth().URI(data);
+    let address = parsed.address ? parsed.address.toString() : '';
+    let message = parsed.message;
+    let amount = parsed.amount || amountFromRedirParams;
+    if (parsed.r) {
+      const payProUrl = this.getPayProUrl(parsed.r);
+      this.goToPayPro(payProUrl, coin);
+    } else this.goSend(address, amount, message, coin);
+  }
+  
   private handleWalletConnectUri(
     uri: string,
     redirParams: RedirParams = {}
@@ -709,6 +736,25 @@ export class IncomingDataProvider {
     }
   }
 
+   private handlePlainHthAddress(
+    data: string,
+    redirParams?: RedirParams
+  ): void {
+    this.logger.debug('Incoming-data: HTH plain address');
+    const coin = 'doge';
+    if (redirParams && redirParams.activePage === 'ScanPage') {
+      this.showMenu({
+        data,
+        type: 'hthAddress',
+        coin
+      });
+    } else if (redirParams && redirParams.amount) {
+      this.goSend(data, redirParams.amount, '', coin);
+    } else {
+      this.goToAmountPage(data, coin);
+    }
+  }
+  
   private goToImportByPrivateKey(data: string): void {
     this.logger.debug('Incoming-data (redirect): QR code export feature');
 
@@ -971,6 +1017,11 @@ export class IncomingDataProvider {
       this.handleLitecoinUri(data, redirParams);
       return true;
 
+       // HTH URI
+    } else if (this.isValidHthUri(data)) {
+      this.handleHthUri(data, redirParams);
+      return true;
+      
       // Wallet Connect URI
     } else if (this.isValidWalletConnectUri(data)) {
       if (data.includes('?uri')) {
@@ -1017,6 +1068,11 @@ export class IncomingDataProvider {
       // Plain Address (Litecoin)
     } else if (this.isValidLitecoinAddress(data)) {
       this.handlePlainLitecoinAddress(data, redirParams);
+      return true;
+      
+      // Plain Address (HTH)
+    } else if (this.isValidHthAddress(data)) {
+      this.handlePlainHthAddress(data, redirParams);
       return true;
 
       // Coinbase
@@ -1233,6 +1289,13 @@ export class IncomingDataProvider {
         type: 'LitecoinUri',
         title: 'Litecoin URI'
       };
+      // HTH URI
+    } else if (this.isValidHthUri(data)) {
+      return {
+        data,
+        type: 'HthUri',
+        title: 'HTH URI'
+      };
       // Wallet Connect URI
     } else if (this.isValidWalletConnectUri(data)) {
       return {
@@ -1303,6 +1366,14 @@ export class IncomingDataProvider {
         data,
         type: 'LitecoinAddress',
         title: this.translate.instant('Litecoin Address')
+      };
+      
+      // Plain Address (HTH)
+    } else if (this.isValidHthAddress(data)) {
+      return {
+        data,
+        type: 'HthAddress',
+        title: this.translate.instant('HTH Address')
       };
 
       // Coinbase
@@ -1384,7 +1455,7 @@ export class IncomingDataProvider {
   public getPayProUrl(data: string): string {
     return decodeURIComponent(
       data.replace(
-        /(bitcoin|bitcoincash|ethereum|ripple|dogecoin|litecoin)?:\?r=/,
+        /(bitcoin|bitcoincash|ethereum|ripple|dogecoin|litecoin|hth)?:\?r=/,
         ''
       )
     );
