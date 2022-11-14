@@ -104,6 +104,7 @@ export class SimplexProvider {
       'usdc',
       'ltc',
       'shib',
+      'hth',
       'xrp'
     ];
     this.fiatAmountLimits = {
