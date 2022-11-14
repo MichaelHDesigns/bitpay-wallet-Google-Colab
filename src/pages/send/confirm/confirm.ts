@@ -1197,6 +1197,9 @@ export class ConfirmPage {
             case 'doge':
               estimatedFee = 1e8; // 1 DOGE
               break;
+            case 'hth':
+              estimatedFee = 1e8; // 1 DOGE
+              break;
             default:
               estimatedFee =
                 size * parseInt((tx.feeRate / 1000).toFixed(0), 10);
@@ -1629,6 +1632,7 @@ export class ConfirmPage {
       coin !== 'bch' &&
       coin !== 'xrp' &&
       coin !== 'doge' &&
+      coin !== 'hth' &&    
       coin !== 'ltc' &&
       !this.usingMerchantFee &&
       !this.fromCoinbase &&
@@ -1903,6 +1907,7 @@ export class ConfirmPage {
       'DogecoinUri',
       'LitecoinUri',
       'RippleUri',
+      'HthUri',
       'InvoiceUri'
     ]);
 
@@ -1950,6 +1955,7 @@ export class ConfirmPage {
       this.tx.coin === 'xrp' ||
       this.tx.coin === 'doge' ||
       this.tx.coin === 'ltc' ||
+      this.tx.coin === 'hth' ||
       this.tx.payProUrl ||
       this.usingMerchantFee ||
       this.fromCoinbase
