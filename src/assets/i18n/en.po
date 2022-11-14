@@ -1815,6 +1815,9 @@ msgstr ""
 "However, unconfirmed funds are not allowed for spending with merchants, "
 "BitPay Card loads, or BitPay in-app gift card purchases."
 
+msgid "HTH Address"
+msgstr ""
+
 msgid "I UNDERSTAND"
 msgstr "I UNDERSTAND"
 
