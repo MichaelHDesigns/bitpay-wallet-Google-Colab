@@ -314,6 +314,12 @@ export class TxDetailsModal {
             ? `https://${this.blockexplorerUrl}dogecoin/transaction/${btx.txid}`
             : `https://${this.blockexplorerUrlTestnet}tx/DOGETEST/${btx.txid}`;
         break;
+      case 'hth':
+        url =
+          this.wallet.credentials.network === 'livenet'
+            ? `http://154.12.237.243:3001/insight-api/transaction/${btx.txid}`
+            : `https://${this.blockexplorerUrlTestnet}tx/DOGETEST/${btx.txid}`;
+        break;
       default:
         url =
           this.wallet.credentials.network === 'livenet'
