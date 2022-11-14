@@ -7,11 +7,13 @@ export class DerivationPathHelperProvider {
   public defaultETH: string;
   public defaultXRP: string;
   public defaultDOGE: string;
+  public defaultHTH: string;
   public defaultLTC: string;
   public defaultTestnet: string;
   public defaultMultisigBTC: string;
   public defaultMultisigBCH: string;
   public defaultMultisigDOGE: string;
+  public defaultMultisigHTH: string;
   public defaultMultisigLTC: string;
 
   public constructor() {
@@ -21,10 +23,12 @@ export class DerivationPathHelperProvider {
     this.defaultXRP = "m/44'/144'/0'";
     this.defaultDOGE = "m/44'/3'/0'";
     this.defaultLTC = "m/44'/2'/0'";
+    this.defaultHTH = "m/44'/0'/0'";
     this.defaultMultisigBTC = "m/48'/0'/0'";
     this.defaultMultisigBCH = "m/48'/145'/0'";
     this.defaultMultisigDOGE = "m/48'/3'/0'";
     this.defaultMultisigLTC = "m/48'/2'/0'";
+    this.defaultMultisigHTH = "m/48'/0'/0'";
     this.defaultTestnet = "m/44'/1'/0'";
   }
 
@@ -84,6 +88,9 @@ export class DerivationPathHelperProvider {
       case "2'": // for LTC
         networkName = 'livenet';
         break;
+      case "4'": // for HTH
+        networkName = 'livenet';
+        break;
     }
     return networkName;
   }
@@ -124,6 +131,9 @@ export class DerivationPathHelperProvider {
         break;
       case 'ltc':
         isValid = ["2'", "1'"].indexOf(coinCode) > -1;
+        break;
+        case 'hth':
+        isValid = ["4'", "1'"].indexOf(coinCode) > -1;
         break;
     }
 
