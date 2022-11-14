@@ -20,6 +20,7 @@ export enum Coin {
   DAI = 'dai',
   WBTC = 'wbtc',
   DOGE = 'doge',
+  HTH = 'hth',
   SHIB = 'shib'
 }
 @Injectable()
