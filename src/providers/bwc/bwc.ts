@@ -23,8 +23,8 @@ export class BwcProvider {
     return BWC.BitcoreDoge;
   }
 
-  public getBitcoreHTH() {
-    return BWC.BitcoreHTH;
+  public getBitcoreHth() {
+    return BWC.BitcoreHth;
   }
   
   public getBitcoreLtc() {
