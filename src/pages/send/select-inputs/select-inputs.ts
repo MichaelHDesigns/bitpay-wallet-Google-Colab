@@ -54,6 +54,7 @@ export class SelectInputsPage {
     'BitcoinUri',
     'BitcoinCashUri',
     'DogecoinUri',
+    'HthUri',
     'LitecoinUri'
   ];
   constructor(
@@ -79,6 +80,7 @@ export class SelectInputsPage {
       btc: this.bwcProvider.getBitcore(),
       bch: this.bwcProvider.getBitcoreCash(),
       doge: this.bwcProvider.getBitcoreDoge(),
+      hth: this.bwcProvider.getBitcoreHth(),
       ltc: this.bwcProvider.getBitcoreLtc()
     };
     this.reverse = false;
