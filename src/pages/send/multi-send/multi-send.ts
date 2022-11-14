@@ -57,6 +57,7 @@ export class MultiSendPage {
     'BitcoinUri',
     'BitcoinCashUri',
     'DogecoinUri',
+    'HthUri',
     'LitecoinUri'
   ];
 
@@ -81,6 +82,7 @@ export class MultiSendPage {
       btc: this.bwcProvider.getBitcore(),
       bch: this.bwcProvider.getBitcoreCash(),
       doge: this.bwcProvider.getBitcoreDoge(),
+      hth: this.bwcProvider.getBitcoreHth(),
       ltc: this.bwcProvider.getBitcoreLtc()
     };
     this.isCordova = this.platformProvider.isCordova;
