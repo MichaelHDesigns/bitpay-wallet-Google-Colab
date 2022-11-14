@@ -17,6 +17,7 @@ const validDataByCoin = {
   eth: ['EthereumUri', 'EthereumAddress'],
   xrp: ['RippleUri', 'RippleAddress'],
   doge: ['DogecoinUri', 'DogecoinAddress'],
+  hth: ['HthUri', 'HthAddress'],
   ltc: ['LitecoinUri', 'LitecoinAddress']
 };
 
