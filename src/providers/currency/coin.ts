@@ -490,6 +490,43 @@ export const availableCoins: CoinsMap<CoinOpts> = {
       gradientBackgroundColor: '#f7921a'
     }
   },
+  hth: {
+    name: 'HTH',
+    chain: 'HTH',
+    coin: 'hth',
+    unitInfo: {
+      unitName: 'HTH',
+      unitToSatoshi: 100000000,
+      unitDecimals: 8,
+      unitCode: 'hth'
+    },
+    properties: {
+      hasMultiSig: true,
+      hasMultiSend: true,
+      isUtxo: true,
+      isERCToken: false,
+      isStableCoin: false,
+      singleAddress: false
+    },
+    paymentInfo: {
+      paymentCode: 'BIP73',
+      protocolPrefix: { livenet: 'hth', testnet: 'hth' },
+      ratesApi: 'https://bws.bitpay.com/bws/api/v3/fiatrates/btc',
+      blockExplorerUrls: 'http://154.12.237.243:3001/insight/',
+      blockExplorerUrlsTestnet: 'bitpay.com/insight/#/BTC/testnet/'
+    },
+    feeInfo: {
+      feeUnit: 'sat/byte',
+      feeUnitAmount: 1000,
+      blockTime: 10,
+      maxMerchantFee: 'urgent'
+    },
+    theme: {
+      coinColor: '#f7931a',
+      backgroundColor: '#34bcaa',
+      gradientBackgroundColor: '#debf12'
+    }
+  },
   shib: {
     name: 'SHIBA INU',
     chain: 'ETH',
